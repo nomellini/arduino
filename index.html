@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+
+  <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyDp501kObV6aUb5FmdkikLoZW4IcS_-npY",
+      authDomain: "ledarduino-3ff1b.firebaseapp.com",
+      databaseURL: "https://ledarduino-3ff1b.firebaseio.com",
+      projectId: "ledarduino-3ff1b",
+      storageBucket: "",
+      messagingSenderId: "481200634686"
+    };
+    var defaultApp = firebase.initializeApp(config);
+    var ref = firebase.database().ref();
+
+    ref.on("value", function (snapshot) {
+      var {led} = snapshot.val();
+      console.log(led);
+    }, function (error) {
+      console.log("Error: " + error.code);
+    });
+
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-database.js"></script>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>Led Arduino</h1>
+    <button id="ligar" class="btn btn-primary">Ligar</button>
+    <button id="desligar" class="btn ">Desligar</button>
+    <button id="toggle" class="btn ">Alterna</button>
+    <button id="piscar" class="btn btn-danger">Piscar</button>
+  </div>
+
+  <script>
+    var btnLigar = document.getElementById('ligar');
+    var btnDesligar = document.getElementById('desligar');
+    var btnPiscar = document.getElementById('piscar');
+    var btnToggle = document.getElementById('toggle');
+
+    btnLigar.addEventListener("click", function () {
+      fetch("http://192.168.0.105:3030/ligar");
+    });
+
+    btnDesligar.addEventListener("click", function () {
+      fetch("http://192.168.0.105:3030/desligar");
+    });
+
+    btnPiscar.addEventListener("click", function () {
+      fetch("http://192.168.0.105:3030/piscar");
+    });
+
+
+    btnToggle.addEventListener("click", function () {
+      fetch("http://192.168.0.105:3030/toggle");
+    });
+  </script>
+
+</body>
+
+</html>
